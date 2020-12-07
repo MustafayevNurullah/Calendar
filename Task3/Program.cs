@@ -30,10 +30,16 @@ namespace Task3
                 int day2 = Convert.ToInt32(date2.Substring(0, 2));
                 int month1 = Convert.ToInt32(date1.Substring(2, 2));
                 int month2 = Convert.ToInt32(date2.Substring(2, 2));
-
                 int year1 = Convert.ToInt32(date1.Substring(4));
                 int year2 = Convert.ToInt32(date2.Substring(4));
                 int okday = 0;
+                yearsChange();
+                GeneralCalculation();
+                DaysCalculated();
+                FebruaryCalclated();
+
+                Console.WriteLine("Result day");
+                Console.WriteLine(okday.ToString());
                 void yearsChange()
                 {
                     if(year1==year2 & month1<month2)
@@ -67,58 +73,61 @@ namespace Task3
                     }
 
                 }
-                yearsChange();
-                cal();
-                DaysCalculated();
-                ok();
-               void cal()
+                void GeneralCalculation()
                 {
-                    if(year2+1==year1 & month1>month2)
+                    if (year2 + 1 == year1)
                     {
-                        MonthCalculted();
-                        okday += 365;
-                    }
-                    if (year2 + 1 == year1 & month1 < month2)
-                    {
-                        MonthCalcultted2();
-                        
-                    }
-                    if (year2 + 1 == year1 & month1 == month2)
-                        okday += 365;
+                        if (month1 > month2)
+                        {
+                            MonthCalculted();
+                            okday += 365;
+                        }
 
-                    if(year1-year2>=2 )
+
+                        if (month1 < month2)
+                        {
+                            MonthCalculttedFebruary();
+                        }
+
+                        if (month1 == month2)
+                        {
+                            okday += 365;
+                        }
+                    }
+
+                    if (year1-year2>=2 )
                     {
                         if (month1 == month2)
                         {
-                            int tmp = year1 - year2;
-                            okday += tmp * 365;
+                            YearCalculated();
                         }
                         if (month1 < month2)
                         {
-                            MonthCalcultted2();
+                            MonthCalculttedFebruary();
                            //modify
                             year2++;
-                           int tmp = year1 - year2;
+                            YearCalculated();
                             year2--;
-                            okday += tmp * 365;
                         }
                        if(month1>month2)
                         {
                             MonthCalculted();
-                            //modify
-                            int tmp = year1 - year2;
-                            okday += tmp* 365;
+
+                            YearCalculated();
                         }
 
                     }
 
-                    //03/01/2020
-                    //04/02/2020
                     if (year1==year2)
                     {
                         MonthCalculted();
                     }
 
+                }
+                void YearCalculated()
+                {
+                    int tmp = year1 - year2;
+                    okday += tmp * 365;
                 }
                 void MonthCalculted()
                 {
@@ -128,7 +137,7 @@ namespace Task3
                     }
                 }
 
-                void MonthCalcultted2()
+                void MonthCalculttedFebruary()
                 {
                     int tmp = 12;
                     for (int i = month2; i <= tmp; i++)
@@ -141,9 +150,8 @@ namespace Task3
                         }
                     }
                 }
-                Console.WriteLine("Result day");
-                Console.WriteLine(okday.ToString());
-                void ok()
+ 
+                void FebruaryCalclated()
                 {
                         if(month1>2)
                         {
@@ -169,6 +177,8 @@ namespace Task3
                         okday -= day2 - day1;
                     }
                 }
+
+                
             }
 
              }
